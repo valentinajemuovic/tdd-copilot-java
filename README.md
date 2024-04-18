@@ -12,14 +12,23 @@ As a Customer, I want to make an online order for pizza, so that I don't have to
 
 Acceptance Criteria:
 
+```
 GIVEN System has unit prices for different pizza types
 AND Customer has selected a pizza type and quantity
 WHEN Customer places an order for that pizza
 THEN System should show the newly generated order number
 AND System should show the order price (calculated as unit price multiplied by quantity)
 AND System should save the newly created order
+```
 
+```
 GIVEN Customer has selected non-positive quantity
 WHEN Customer attempts to place an order
 THEN System should show an error message "You must order at least one pizza"  
+```
 
+```
+GIVEN Customer has selected a pizza type and quantity
+AND Customer has selected country "US"
+THEN System applies 10% discount to the order price
+```
