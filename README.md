@@ -32,3 +32,13 @@ GIVEN Customer has selected a pizza type and quantity
 AND Customer has selected country "US"
 THEN System applies 10% discount to the order price
 ```
+
+## Instructions
+
+```bash
+./gradlew build
+```
+
+```bash
+./gradlew pitest
+```
