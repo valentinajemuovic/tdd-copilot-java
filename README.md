@@ -6,7 +6,7 @@
 
 I want to build an eshop system. Could you guide me in development of this system using TDD and Hexagonal Architecture.
 
-Let's start with this User Story:  
+Let's start with this User Story:
 
 As a Customer, I want to make an online order for pizza, so that I don't have to go to the physical store. 
 
