@@ -1,5 +1,8 @@
 package com.optivem.tddaijava.pizza;
 
+import java.util.Map;
+import java.util.HashMap;
+
 public class InMemoryOrderRepository implements OrderRepository {
     private Map<Integer, Order> orders = new HashMap<>();
 

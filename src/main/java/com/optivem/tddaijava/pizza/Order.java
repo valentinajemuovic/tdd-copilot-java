@@ -14,5 +14,11 @@ public class Order {
         this.price = price;
     }
 
-    // getters
+    public int getId() {
+        return id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }

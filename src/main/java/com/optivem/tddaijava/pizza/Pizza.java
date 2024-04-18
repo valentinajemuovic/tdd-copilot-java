@@ -9,5 +9,7 @@ public class Pizza {
         this.price = price;
     }
 
-    // getters
+    public double getPrice() {
+        return price;
+    }
 }
