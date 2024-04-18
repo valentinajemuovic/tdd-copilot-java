@@ -8,7 +8,7 @@ I want to build an eshop system. Could you guide me in development of this syste
 
 Let's start with this User Story:
 
-As a Customer, I want to make an online order for pizza, so that I don't have to go to the physical store. 
+As a Customer, I want to make an online order for pizza, so that I don't have to go to the physical store.
 
 Acceptance Criteria:
 
@@ -24,7 +24,7 @@ AND System should save the newly created order
 ```
 GIVEN Customer has selected non-positive quantity
 WHEN Customer attempts to place an order
-THEN System should show an error message "You must order at least one pizza"  
+THEN System should show an error message "You must order at least one pizza"
 ```
 
 ```
