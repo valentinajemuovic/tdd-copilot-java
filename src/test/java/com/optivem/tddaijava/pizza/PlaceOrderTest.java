@@ -23,4 +23,6 @@ class PlaceOrderTest {
         assertEquals(20.0, order1.getPrice());
         assertEquals(order1, orderRepository.findById(order1.getId()));
     }
+
+
 }
