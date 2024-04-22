@@ -1,14 +1,17 @@
 package com.optivem.tddaijava.pizza;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 public class InMemoryOrderRepository implements OrderRepository {
     private Map<Integer, Order> orders = new HashMap<>();
+    private int nextId = 1;
 
     @Override
-    public void save(Order order) {
+    public Order save(Order order) {
+        order.setId(nextId++);
         orders.put(order.getId(), order);
+        return order;
     }
 
     @Override
