@@ -19,7 +19,12 @@ class PlaceOrderTest {
     void testPlaceOrderWithValidPizzaAndQuantity() {
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 2;
-        Order order = placeOrder.execute(pizza, quantity, "UK");
+        PlaceOrderRequest request = new PlaceOrderRequestBuilder()
+                .withPizza(pizza)
+                .withQuantity(quantity)
+                .withCountry("UK")
+                .build();
+        Order order = placeOrder.execute(request);
         assertThat(order).isNotNull();
     }
 
@@ -27,7 +32,12 @@ class PlaceOrderTest {
     void testPlaceOrderCalculatesCorrectPrice() {
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 2;
-        Order order = placeOrder.execute(pizza, quantity, "UK");
+        PlaceOrderRequest request = new PlaceOrderRequestBuilder()
+                .withPizza(pizza)
+                .withQuantity(quantity)
+                .withCountry("UK")
+                .build();
+        Order order = placeOrder.execute(request);
         assertThat(order.getPrice()).isEqualTo(20.0);
     }
 
@@ -35,8 +45,13 @@ class PlaceOrderTest {
     void testPlaceOrderAssignsUniqueId() {
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 2;
-        Order order1 = placeOrder.execute(pizza, quantity, "UK");
-        Order order2 = placeOrder.execute(pizza, quantity, "UK");
+        PlaceOrderRequest request = new PlaceOrderRequestBuilder()
+                .withPizza(pizza)
+                .withQuantity(quantity)
+                .withCountry("UK")
+                .build();
+        Order order1 = placeOrder.execute(request);
+        Order order2 = placeOrder.execute(request);
         assertThat(order2.getId()).isGreaterThan(order1.getId());
     }
 
@@ -44,7 +59,12 @@ class PlaceOrderTest {
     void testPlaceOrderSavesOrderToRepository() {
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 2;
-        Order order = placeOrder.execute(pizza, quantity, "UK");
+        PlaceOrderRequest request = new PlaceOrderRequestBuilder()
+                .withPizza(pizza)
+                .withQuantity(quantity)
+                .withCountry("UK")
+                .build();
+        Order order = placeOrder.execute(request);
         assertThat(order).isEqualTo(orderRepository.findById(order.getId()));
     }
 
@@ -52,7 +72,12 @@ class PlaceOrderTest {
     void testPlaceOrderReturnsSavedOrder() {
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 2;
-        Order order = placeOrder.execute(pizza, quantity, "UK");
+        PlaceOrderRequest request = new PlaceOrderRequestBuilder()
+                .withPizza(pizza)
+                .withQuantity(quantity)
+                .withCountry("UK")
+                .build();
+        Order order = placeOrder.execute(request);
         assertThat(order).isEqualTo(orderRepository.findById(order.getId()));
     }
 
@@ -60,7 +85,12 @@ class PlaceOrderTest {
     void testPlaceOrderWithNonPositiveQuantity() {
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 0;
-        assertThrows(IllegalArgumentException.class, () -> placeOrder.execute(pizza, quantity, "UK"), "You must order at least one pizza");
+        PlaceOrderRequest request = new PlaceOrderRequestBuilder()
+                .withPizza(pizza)
+                .withQuantity(quantity)
+                .withCountry("UK")
+                .build();
+        assertThrows(IllegalArgumentException.class, () -> placeOrder.execute(request), "You must order at least one pizza");
     }
 
     @Test
