@@ -3,6 +3,7 @@ package com.optivem.tddaijava.pizza;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PlaceOrderTest {
     private OrderRepository orderRepository;
@@ -53,5 +54,12 @@ class PlaceOrderTest {
         int quantity = 2;
         Order order = placeOrder.execute(pizza, quantity);
         assertThat(order).isEqualTo(orderRepository.findById(order.getId()));
+    }
+
+    @Test
+    void testPlaceOrderWithNonPositiveQuantity() {
+        Pizza pizza = new Pizza("Margherita", 10.0);
+        int quantity = 0;
+        assertThrows(IllegalArgumentException.class, () -> placeOrder.execute(pizza, quantity), "You must order at least one pizza");
     }
 }
