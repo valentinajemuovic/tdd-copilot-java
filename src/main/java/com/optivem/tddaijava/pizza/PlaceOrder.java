@@ -8,11 +8,11 @@ public class PlaceOrder {
         this.orderRepository = orderRepository;
     }
 
-    public Order execute(Pizza pizza, int quantity, String country) {
-        validateQuantity(quantity);
-        double price = calculatePrice(pizza, quantity);
-        price = applyDiscount(price, country);
-        return createAndSaveOrder(pizza, quantity, price);
+    public Order execute(PlaceOrderRequest request) {
+        validateQuantity(request.getQuantity());
+        double price = calculatePrice(request.getPizza(), request.getQuantity());
+        price = applyDiscount(price, request.getCountry());
+        return createAndSaveOrder(request.getPizza(), request.getQuantity(), price);
     }
 
     private void validateQuantity(int quantity) {
