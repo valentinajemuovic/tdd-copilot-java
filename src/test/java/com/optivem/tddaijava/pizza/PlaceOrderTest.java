@@ -68,7 +68,12 @@ class PlaceOrderTest {
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 2;
         String country = "US";
-        Order order = placeOrder.execute(pizza, quantity, country);
+        PlaceOrderRequest request = new PlaceOrderRequestBuilder()
+                .withPizza(pizza)
+                .withQuantity(quantity)
+                .withCountry(country)
+                .build();
+        Order order = placeOrder.execute(request);
         assertThat(order.getPrice()).isEqualTo(18.0); // 10% discount applied
     }
 }
