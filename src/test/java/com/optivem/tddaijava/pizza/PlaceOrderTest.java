@@ -1,48 +1,51 @@
 package com.optivem.tddaijava.pizza;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlaceOrderTest {
-    @Test
-    void placeOrderWithFirstOrder() {
-        // Arrange
-        OrderRepository orderRepository = new InMemoryOrderRepository();
-        PlaceOrder placeOrder = new PlaceOrder(orderRepository);
-        Pizza pizza = new Pizza("Margherita", 10.0);
-        int quantity = 2;
+    private OrderRepository orderRepository;
+    private PlaceOrder placeOrder;
+    private Pizza pizza;
+    private int quantity;
 
-        // Act
-        Order order1 = placeOrder.execute(pizza, quantity);
-
-        // Assert
-        assertNotNull(order1.getId());
-        assertEquals(20.0, order1.getPrice());
-        assertEquals(order1, orderRepository.findById(order1.getId()));
+    @BeforeEach
+    void setUp() {
+        orderRepository = new InMemoryOrderRepository();
+        placeOrder = new PlaceOrder(orderRepository);
+        pizza = new Pizza("Margherita", 10.0);
+        quantity = 2;
     }
 
     @Test
     void testPlaceOrderWithValidPizzaAndQuantity() {
-        // Test implementation goes here
+        Order order = placeOrder.execute(pizza, quantity);
+        assertNotNull(order);
     }
 
     @Test
     void testPlaceOrderCalculatesCorrectPrice() {
-        // Test implementation goes here
+        Order order = placeOrder.execute(pizza, quantity);
+        assertEquals(20.0, order.getPrice());
     }
 
     @Test
     void testPlaceOrderAssignsUniqueId() {
-        // Test implementation goes here
+        Order order1 = placeOrder.execute(pizza, quantity);
+        Order order2 = placeOrder.execute(pizza, quantity);
+        assertTrue(order2.getId() > order1.getId());
     }
 
     @Test
     void testPlaceOrderSavesOrderToRepository() {
-        // Test implementation goes here
+        Order order = placeOrder.execute(pizza, quantity);
+        assertEquals(order, orderRepository.findById(order.getId()));
     }
 
     @Test
     void testPlaceOrderReturnsSavedOrder() {
-        // Test implementation goes here
+        Order order = placeOrder.execute(pizza, quantity);
+        assertEquals(order, orderRepository.findById(order.getId()));
     }
 }
