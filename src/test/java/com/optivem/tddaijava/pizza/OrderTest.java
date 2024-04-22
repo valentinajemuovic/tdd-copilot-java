@@ -5,29 +5,34 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderTest {
     @Test
-    void testIdIncrement() {
+    void testGetId() {
         // Arrange
+        OrderRepository orderRepository = new InMemoryOrderRepository();
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 2;
 
         // Act
-        Order order1 = new Order(pizza, quantity, 10.0);
-        Order order2 = new Order(pizza, quantity, 10.0);
+        Order order = new Order(pizza, quantity, 20.0);
+        order = orderRepository.save(order);
 
         // Assert
-        assertTrue(order2.getId() > order1.getId()); // This will fail if id is not properly incremented
+        assertNotNull(order.getId());
     }
 
     @Test
-    void testGetId() {
+    void testIdIncrement() {
         // Arrange
+        OrderRepository orderRepository = new InMemoryOrderRepository();
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 2;
 
         // Act
-        Order order = new Order(pizza, quantity, 10.0);
+        Order order1 = new Order(pizza, quantity, 20.0);
+        order1 = orderRepository.save(order1);
+        Order order2 = new Order(pizza, quantity, 20.0);
+        order2 = orderRepository.save(order2);
 
         // Assert
-        assertNotEquals(0, order.getId()); // This will fail if getId() returns 0
+        assertTrue(order2.getId() > order1.getId());
     }
 }
