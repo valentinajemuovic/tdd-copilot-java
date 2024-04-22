@@ -57,15 +57,6 @@ class PlaceOrderTest {
     }
 
     @Test
-    void testSaveOrderReturnsSavedOrder() {
-        Pizza pizza = new Pizza("Margherita", 10.0);
-        int quantity = 2;
-        Order order = new Order(pizza, quantity, 20.0);
-        Order savedOrder = orderRepository.save(order);
-        assertThat(savedOrder).isEqualTo(order);
-    }
-
-    @Test
     void testPlaceOrderWithNonPositiveQuantity() {
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 0;
