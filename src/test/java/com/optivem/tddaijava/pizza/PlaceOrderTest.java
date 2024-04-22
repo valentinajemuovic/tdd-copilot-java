@@ -65,10 +65,21 @@ class PlaceOrderTest {
         assertThat(savedOrder).isEqualTo(order);
     }
 
+
+
     @Test
     void testPlaceOrderWithNonPositiveQuantity() {
         Pizza pizza = new Pizza("Margherita", 10.0);
         int quantity = 0;
         assertThrows(IllegalArgumentException.class, () -> placeOrder.execute(pizza, quantity), "You must order at least one pizza");
+    }
+
+    @Test
+    void testPlaceOrderAppliesDiscountForUS() {
+        Pizza pizza = new Pizza("Margherita", 10.0);
+        int quantity = 2;
+        String country = "US";
+        Order order = placeOrder.execute(pizza, quantity, country);
+        assertThat(order.getPrice()).isEqualTo(18.0); // 10% discount applied
     }
 }
