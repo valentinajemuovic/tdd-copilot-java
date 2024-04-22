@@ -20,4 +20,29 @@ class PlaceOrderTest {
         assertEquals(20.0, order1.getPrice());
         assertEquals(order1, orderRepository.findById(order1.getId()));
     }
+
+    @Test
+    void testPlaceOrderWithValidPizzaAndQuantity() {
+        // Test implementation goes here
+    }
+
+    @Test
+    void testPlaceOrderCalculatesCorrectPrice() {
+        // Test implementation goes here
+    }
+
+    @Test
+    void testPlaceOrderAssignsUniqueId() {
+        // Test implementation goes here
+    }
+
+    @Test
+    void testPlaceOrderSavesOrderToRepository() {
+        // Test implementation goes here
+    }
+
+    @Test
+    void testPlaceOrderReturnsSavedOrder() {
+        // Test implementation goes here
+    }
 }
