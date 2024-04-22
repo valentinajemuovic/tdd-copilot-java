@@ -2,7 +2,7 @@ package com.optivem.tddaijava.pizza;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 class PlaceOrderTest {
     private OrderRepository orderRepository;
@@ -21,31 +21,31 @@ class PlaceOrderTest {
     @Test
     void testPlaceOrderWithValidPizzaAndQuantity() {
         Order order = placeOrder.execute(pizza, quantity);
-        assertNotNull(order);
+        assertThat(order).isNotNull();
     }
 
     @Test
     void testPlaceOrderCalculatesCorrectPrice() {
         Order order = placeOrder.execute(pizza, quantity);
-        assertEquals(20.0, order.getPrice());
+        assertThat(order.getPrice()).isEqualTo(20.0);
     }
 
     @Test
     void testPlaceOrderAssignsUniqueId() {
         Order order1 = placeOrder.execute(pizza, quantity);
         Order order2 = placeOrder.execute(pizza, quantity);
-        assertTrue(order2.getId() > order1.getId());
+        assertThat(order2.getId()).isGreaterThan(order1.getId());
     }
 
     @Test
     void testPlaceOrderSavesOrderToRepository() {
         Order order = placeOrder.execute(pizza, quantity);
-        assertEquals(order, orderRepository.findById(order.getId()));
+        assertThat(order).isEqualTo(orderRepository.findById(order.getId()));
     }
 
     @Test
     void testPlaceOrderReturnsSavedOrder() {
         Order order = placeOrder.execute(pizza, quantity);
-        assertEquals(order, orderRepository.findById(order.getId()));
+        assertThat(order).isEqualTo(orderRepository.findById(order.getId()));
     }
 }
