@@ -5,6 +5,12 @@ public class PlaceOrderRequestBuilder {
     private int quantity;
     private String country;
 
+    public PlaceOrderRequestBuilder() {
+        this.pizza = new Pizza("Margherita", 10.0);
+        this.quantity = 1;
+        this.country = "UK";
+    }
+
     public PlaceOrderRequestBuilder withPizza(Pizza pizza) {
         this.pizza = pizza;
         return this;
